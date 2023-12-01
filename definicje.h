@@ -13,5 +13,5 @@ typedef struct
     wielkosc_planszy pole[SZEROKOSC_POLA][WYSOKOSC_POLA];
 } plansza;
 
-
+widzisz to?
 #endif
