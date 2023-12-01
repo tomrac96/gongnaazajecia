@@ -15,5 +15,5 @@ typedef struct
     wielkosc_planszy plansza[SZEROKOSC_PLANSZY][WYSOKOSC_PLANSZY];
 } plansza;
 
-
+klops
 #endif
