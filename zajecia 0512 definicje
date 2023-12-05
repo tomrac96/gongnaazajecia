@@ -2,39 +2,18 @@
 
 #define DEFINICJE
 
-#define SZEROKOSC_POLA 16
-#define WYSOKOSC_POLA 8
+#define SZEROKOSC_PLANSZY 8
+#define WYSOKOSC_PLANSZY 8
 
-//const int HANIEBNA_PORAZKA = -(SZEROKOSC_POLA * WYSOKOSC_POLA + 100);
-//const int CHWALEBNE_ZWYCIESTWO = -HANIEBNA_PORAZKA;
-
-#include <limits.h>
-
-typedef enum { PUSTE, BIALY, CZARNY } typ_pola;
-typedef enum { RUCH_BIALEGO, RUCH_CZARNEGO } ruch_gracza;
+typedef enum { PUSTE, BIALA, CZARNA } wielkosc_planszy;
+typedef enum { RUCH_GRACZ1, RUCH_GRACZ2 } kto_sie_rusza;
+//https://pl.wikibooks.org/wiki/C/Typy_z%C5%82o%C5%BCone    opis jak działa enum   na tym mozna tez ruchy robic
 
 typedef struct
 {
-    typ_pola pole[SZEROKOSC_POLA][WYSOKOSC_POLA];
-    ruch_gracza gracz_na_ruchu;
-} poletko_gry;
+    kto_sie_rusza ruch_gracza_X;
+    wielkosc_planszy plain[SZEROKOSC_PLANSZY][WYSOKOSC_PLANSZY];
+} plansza;
 
-typedef struct
-{
-    char wiersz, kolumna;
-} pole;
-
-typedef struct
-{
-    pole na_pole;
-} ruch;
-
-typedef struct element
-{
-    ruch ruch;
-    struct element* nastepny;
-} ruch_na_liscie;
-
-int kierunki[8][2] = { {0, 1}, {0, -1}, {1, 0}, {-1, 0}, {1, -1}, {-1, 1}, {-1, -1}, {1, 1} };
 
 #endif
