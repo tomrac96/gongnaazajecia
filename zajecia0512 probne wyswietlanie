@@ -1,0 +1,10 @@
+#include "definicje.h"
+#include "jadrogry.h"
+#include <stdio.h>
+
+void wypisz();
+void main()
+{
+    plansza *teatr_wojenny;
+    wypisz(teatr_wojenny);
+}
