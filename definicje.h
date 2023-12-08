@@ -1,5 +1,4 @@
 #ifndef DEFINICJE
-
 #define DEFINICJE
 
 #define SZEROKOSC_PLANSZY 6
@@ -12,7 +11,8 @@ typedef enum { RUCH_GRACZ1, RUCH_GRACZ2 } kto_sie_rusza;
 typedef struct
 {
     kto_sie_rusza ruch_gracza_X;
-    wielkosc_planszy plansza[SZEROKOSC_PLANSZY][WYSOKOSC_PLANSZY];
+    wielkosc_planszy plain[SZEROKOSC_PLANSZY][WYSOKOSC_PLANSZY];
 } plansza;
+
 
 #endif
