@@ -6,7 +6,7 @@
 #include "definicje.h"
 
 plansza sory_memory(plansza *teatr_wojenny){
-    return (plansza) { .ruch_gracza_X=RUCH_CZARNY};
+    return (plansza) { .ruch_gracza_X=RUCH_CZARNY };
 }
 
 void vanish(plansza *teatr_wojenny){
@@ -37,10 +37,10 @@ void wypisz(plansza *teatr_wojenny)
                     printf(" + ");
                     break;
                 case BIALA:
-                    printf(" O ");
+                    printf(" ⚈ ");
                     break;
                 case CZARNA:
-                    printf(" か ");
+                    printf(" ⚆ ");
                     break;
             }
         printf("|\n");
