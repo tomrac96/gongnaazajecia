@@ -49,7 +49,7 @@ void wypisz(plansza *teatr_wojenny)
     for(int i = 0; i < 3 * SZEROKOSC_PLANSZY; printf("="), i++);
     printf("+\n   ");
     for(int i = 0; i < SZEROKOSC_PLANSZY; printf(" %c ", 'A' + i++));
-    printf("\nRuch przypada na %s\n", teatr_wojenny->ruch_gracza_X == RUCH_CZARNY ? "Gracz 2" : "Gracz 1");
+    printf("\nRuch przypada na %s\n", teatr_wojenny->ruch_gracza_X == RUCH_CZARNY ? "Gracza BIALEGO" : "Gracza CZARNEGO");
     
 }
 
