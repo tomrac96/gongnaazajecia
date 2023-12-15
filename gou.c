@@ -58,12 +58,12 @@ ruch dokad_przybyszu(plansza teatr_wojenny){
     printf("\n\ngdzie chcesz sie postawic?");
     scanf("%s", &where);
 
-    if(where[0]=='p' && where[1]=='a' && where[2]=='s'){
+    if(where[0]=='p' && where[1]=='a' && where[2]=='s'){ //SPRAWDZA CZY PAS
         ruch staruch={.pas=TAK};
         return staruch;
     }
 
-    if(where[0]>='A' && where[0] < ('A' + SZEROKOSC_PLANSZY) && where[1] < ('0' 
+    if(where[0]>='A' && where[0] < ('A' + SZEROKOSC_PLANSZY) && where[1] < ('0' //SPRAWDZA I INTERPRETUJE WARTOSC WPISANA PRZEZ UZYTK I PRZETWARZA NA KOORDYNATY
     + WYSOKOSC_PLANSZY) && teatr_wojenny.plain[where[0] - 'A'][where[1] - '0'] == PUSTE){
         
         ruch staruch = { .wierszyk=where[1]-'0',.kolumnyk=where[0]-'A'};
@@ -80,8 +80,8 @@ ruch dokad_przybyszu(plansza teatr_wojenny){
 
 plansza ruszek(plansza teatr_wojenny,ruch staruszek){
     
-    int i=staruszek.wierszyk;
-    int j=staruszek.kolumnyk;
+    int j=staruszek.wierszyk;
+    int i=staruszek.kolumnyk;
     if(staruszek.pas==TAK){
         teatr_wojenny.qn=1;
         teatr_wojenny.blad=NO;
@@ -92,7 +92,8 @@ plansza ruszek(plansza teatr_wojenny,ruch staruszek){
          teatr_wojenny.plain[i][j]=CZARNA;
         if(teatr_wojenny.ruch_gracza_X==RUCH_BIALY)
          teatr_wojenny.plain[i][j]=BIALA;
-         teatr_wojenny.blad=NO;
+
+        teatr_wojenny.blad=NO;
     return teatr_wojenny;
     }
     if(teatr_wojenny.plain[i][j]!=PUSTE){
@@ -100,3 +101,4 @@ plansza ruszek(plansza teatr_wojenny,ruch staruszek){
     }
 }
 
+plansza bicie
