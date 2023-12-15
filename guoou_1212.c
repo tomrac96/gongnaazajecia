@@ -8,6 +8,7 @@ plansza sory_memory(teatr_wojenny);
 int ruszek(teatr_wojenny);
 ruch dokad_przybyszu(teatr_wojenny);
 void no_to_gramy(teatr_wojenny);
+
 void main(){
     
     plansza teatr_wojenny;
@@ -15,22 +16,28 @@ void main(){
 }
 
 void no_to_gramy(plansza teatr_wojenny){
+    
     int qniec=0;
     vanish(&teatr_wojenny);
     sory_memory(&teatr_wojenny);
     wypisz(&teatr_wojenny);
     do{
+    ruch staruszek1=dokad_przybyszu(teatr_wojenny);
 
-    ruszek(teatr_wojenny);
-    if(ruszek(teatr_wojenny)==1)
+     ruszek(teatr_wojenny,staruszek1);
+      if(ruszek(teatr_wojenny,staruszek1)==1)
         qniec++;
-    teatr_wojenny.ruch_gracza_X=RUCH_BIALY;
 
-    ruszek(teatr_wojenny);
-    if(ruszek(teatr_wojenny)==1)
+    teatr_wojenny.ruch_gracza_X=RUCH_BIALY; ///KOLEJ NA DRUGIEGO GRACZA
+
+    ruch staruszek2=dokad_przybyszu(teatr_wojenny);
+
+     ruszek(teatr_wojenny,staruszek2);
+      if(ruszek(teatr_wojenny,staruszek2)==1)
         qniec++;
 
     }while(qniec!=2);
+    printf("ende");
 }
 
 ruch dokad_przybyszu(plansza teatr_wojenny){
@@ -61,8 +68,8 @@ ruch dokad_przybyszu(plansza teatr_wojenny){
     }
 }
 
-int ruszek(plansza teatr_wojenny){
-    ruch staruszek=dokad_przybyszu(teatr_wojenny);
+int ruszek(plansza teatr_wojenny,ruch staruszek){
+    
     int i=staruszek.wierszyk;
     int j=staruszek.kolumnyk;
     int qn;
@@ -73,6 +80,7 @@ int ruszek(plansza teatr_wojenny){
          printf("\nGracz bialy pasuje");
 
         qn=1;
+        staruszek.pas=NIE;
         return qn;
     }
     if(teatr_wojenny.plain[i][j]==PUSTE){
@@ -83,7 +91,7 @@ int ruszek(plansza teatr_wojenny){
          teatr_wojenny.plain[i][j]=BIALA;
     }
     else{
-        printf("\nMajorze to zasadzka, ktos tu stoi!!!");
+        printf("\nMajorze to zasadzka, ktos tu jest!!!");
     }
 
 }
