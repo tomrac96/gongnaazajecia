@@ -1,0 +1,46 @@
+#define ROZMIAR_PLANSZY 19 // Rozmiar standardowej planszy w Go
+
+typedef struct {
+    int wiersz;
+    int kolumna;
+} Pole;
+
+typedef struct {
+    Pole z;
+    Pole na;
+} Ruch;
+
+typedef struct ListaRuchow {
+    Ruch ruch;
+    struct ListaRuchow* nastepny;
+} ListaRuchow;
+
+typedef int Plansza[ROZMIAR_PLANSZY][ROZMIAR_PLANSZY];
+
+ListaRuchow* generujRuchyGo(Plansza plansza, int gracz) {
+    ListaRuchow* listaRuchow = NULL;
+
+    for (int wiersz = 0; wiersz < ROZMIAR_PLANSZY; wiersz++) {
+        for (int kolumna = 0; kolumna < ROZMIAR_PLANSZY; kolumna++) {
+            if (plansza[wiersz][kolumna] == 0) { // Sprawdzenie, czy pole jest puste
+                Ruch ruch = {{wiersz, kolumna}, {-1, -1}}; // Tworzenie struktury ruchu
+
+                // Sprawdzenie czy wykonujący ruch gracz może postawić kamień na danym polu
+                // i dodanie tego ruchu do listy
+                if (czyMoznaPostawicKamien(plansza, gracz, wiersz, kolumna)) {
+                    listaRuchow = dodajRuch(listaRuchow, ruch);
+                }
+            }
+        }
+    }
+
+    return listaRuchow;
+}
+
+// Funkcja sprawdzająca, czy gracz może postawić kamień na danym polu
+int czyMoznaPostawicKamien(Plansza plansza, int gracz, int wiersz, int kolumna) {
+    // Implementacja logiki sprawdzającej czy na dane pole można postawić kamień
+    // (np. czy ruch nie narusza reguły samobójstwa, czy nie jest suicydalny itp.)
+    // Zwraca 1 jeśli można postawić kamień, 0 w przeciwnym razie
+    // Ta funkcja jest kluczowa i musi uwzględniać wiele reguł gry Go
+    // Tutaj przedstawiono tylko szkic tej funkcji.
