@@ -103,3 +103,29 @@ ListaRuchow* generujRuchyGo(Plansza plansza, int gracz) {
 
     return listaRuchow;
 }
+
+
+
+
+
+#include <stdbool.h>
+
+// Funkcja sprawdzająca czy dany ruch jest prawidłowy
+bool czy_prawidlowy_ruch(plansza teatr_wojenny, int i, int j) {
+    return (i >= 0 && i < SZEROKOSC_PLANSZY && j >= 0 && j < WYSOKOSC_PLANSZY &&
+            teatr_wojenny.plain[i][j] == PUSTE);
+}
+
+// Funkcja generująca możliwe ruchy dla aktualnego gracza
+void generuj_ruchy(plansza teatr_wojenny) {
+    printf("\nLista mozliwych ruchow:\n");
+    for (int i = 0; i < SZEROKOSC_PLANSZY; ++i) {
+        for (int j = 0; j < WYSOKOSC_PLANSZY; ++j) {
+            if (czy_prawidlowy_ruch(teatr_wojenny, i, j)) {
+                printf("Mozliwy ruch: %c%d\n", 'A' + i, j);
+                // Tutaj możesz zdecydować, co robić z każdym znalezionym ruchem
+                // Możesz je przechowywać, wyświetlać lub podejmować decyzje na ich podstawie
+            }
+        }
+    }
+}
