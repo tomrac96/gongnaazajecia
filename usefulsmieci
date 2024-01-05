@@ -19,3 +19,14 @@ int liberties = 0;
         return NIE; // Grupa nie ma oddechów, ruch jest niedozwolony (samobójstwo)
     }
 } 
+
+
+
+
+
+int czy_samobojstwo = check_suicide(teatr_wojenny, i, j);
+        if (czy_samobojstwo == TAK) {
+            // Jeśli ruch jest niedozwolony (samobójstwo), cofnij go
+            teatr_wojenny.plain[i][j] = PUSTE;
+            printf("Ruch niedozwolony - samobójstwo!\n");
+        }
