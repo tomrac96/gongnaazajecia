@@ -142,9 +142,9 @@ plansza czy_bicie(plansza teatr_wojenny,plansza niby_zbite,plansza zbadane,plans
                 pusteczka++;
              if(j-1>=0 && teatr_wojenny.plain[i][j-1]==PUSTE)
                 pusteczka++;
-             if(i+1<=SZEROKOSC_PLANSZY && teatr_wojenny.plain[i+1][j]==PUSTE)
+             if(i+1<SZEROKOSC_PLANSZY && teatr_wojenny.plain[i+1][j]==PUSTE)
                 pusteczka++;
-             if(j+1<=WYSOKOSC_PLANSZY && teatr_wojenny.plain[i][j+1]==PUSTE)
+             if(j+1<WYSOKOSC_PLANSZY && teatr_wojenny.plain[i][j+1]==PUSTE)
                 pusteczka++;
 
             if(pusteczka==0){
