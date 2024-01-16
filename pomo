@@ -1,0 +1,29 @@
+/*void glebokosc_rowu_marianskiego()
+{
+    int glebokosc_bialka, glebokosc_czarnka;
+
+    printf("Podaj poziom trudności dla gracza kolka: ");
+    scanf("%d", &glebokosc_bialka);
+
+    printf("Podaj poziom trudności dla gracza krzyzyka: ");
+    scanf("%d", &glebokosc_czarnka);
+
+    printf("info glebokosc kolka %d glebokosc krzyzyka %d\n", glebokosc_bialka, glebokosc_czarnka);
+
+    // Wywołaj funkcję __graj(), przekazując wybrane poziomy trudności.
+    __graj(teatr_wojenny.gracz_na_ruchu == RUCH_BIALY ? glebokosc_bialka : glebokosc_czarnka);
+}
+*/
+
+void glebokosc_rowu_marianskiego()
+{
+    int glebokosc;
+    scanf("d", glebokosc);
+    graj_piekny_komputerze(glebokosc);
+
+}
+
+void graj_piekny_komputerze(int glebokosc)
+{
+    
+}
