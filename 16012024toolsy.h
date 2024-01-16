@@ -5,35 +5,14 @@
 #include <stdio.h>
 #include "definicje.h"
 
-plansza sory_memory(plansza *teatr_wojenny){
-    return (plansza) { .ruch_gracza_X=RUCH_CZARNY };
+void przepisz(plansza *z,ikea *d0){
+     for(int i=0;i<SZEROKOSC_PLANSZY;i++)
+        for(int j=0;j<WYSOKOSC_PLANSZY;j++)
+            d0->plain[j][i]=z->plain[j][i];
 }
 
-plansza bakapik(plansza *backup){
-    backup=malloc(sizeof(plansza)); 
-    
-
-    backup->next=malloc(sizeof(plansza));
-    
-
-    backup->prev=malloc(sizeof(plansza));
-    
-    //backup->prev->prev=backup->prev;
-    //free(backup->prev);
-    backup->prev->prev=malloc(sizeof(plansza));   // <- ta linijka sie nie dzieje z jakiegos powodu
-
-    *backup=(plansza){.prev=backup->prev, .next=backup->next};
-    *backup->next=(plansza){.prev=backup};  
-    *backup->prev->prev=(plansza){.next=backup->prev};
-    *backup->prev=(plansza){.prev=backup->prev->prev, .next=backup};
-  
-    }
-
-plansza nyet_bakapik(plansza *backup){
-    free(backup->prev->prev);
-    free(backup->prev);
-    free(backup);
-    free(backup->next);
+plansza sory_memory(plansza *teatr_wojenny){
+    return (plansza) { .ruch_gracza_X=RUCH_CZARNY };
 }
 
 void vanish(plansza *poletko){
