@@ -3,21 +3,31 @@
 #include "definicje.h"
 #include "toolsy.h"
 
-legal ko(plansza teatr_wojenny,plansza *backup){
+legal ko(plansza teatr_wojenny,castorama *spr){
     legal mozna2;
+    int kloppppsiikkkk=0;
     if(teatr_wojenny.ruch_gracza_X==RUCH_CZARNY)
       for(int j=0;j<SZEROKOSC_PLANSZY;j++)
         for(int i=0;i<WYSOKOSC_PLANSZY ;i++)
-            if(backup->plain[i][j]==backup->prev->prev->plain[i][j])  //chyba ma jakis problem z backp->prev->prev (adresu nie ma)
-                mozna2.czy_legalne=NL;
+            if(spr->zero.plain[i][j]==spr->minus2.plain[i][j]) {
+                kloppppsiikkkk++;
+                if(kloppppsiikkkk==SZEROKOSC_PLANSZY*WYSOKOSC_PLANSZY)
+                    mozna2.czy_legalne=NL;
+                else
+                    mozna2.czy_legalne=L;       }
             else
                 mozna2.czy_legalne=L;
              
     if(teatr_wojenny.ruch_gracza_X==RUCH_BIALY)
       for(int j=0;j<SZEROKOSC_PLANSZY;j++)
         for(int i=0;i<WYSOKOSC_PLANSZY ;i++)
-            if(backup->next->plain[i][j]==backup->prev->plain[i][j])
-                mozna2.czy_legalne=NL;
+            if(spr->zero.plain[i][j]==spr->minus2.plain[i][j]) {
+                kloppppsiikkkk++;
+                if(kloppppsiikkkk==SZEROKOSC_PLANSZY*WYSOKOSC_PLANSZY)
+                    mozna2.czy_legalne=NL; 
+                else 
+                    mozna2.czy_legalne=L; 
+                }
             else
                 mozna2.czy_legalne=L;
             
@@ -30,6 +40,8 @@ legal samobuj(plansza teatr_wojenny,ruch gruch,plansza zbadane,plansza niby_zbit
     int i=gruch.kolumnyk;
     int j=gruch.wierszyk;
     int pusteczka=0,sojuz=0;
+
+    
 
      if(teatr_wojenny.ruch_gracza_X==RUCH_CZARNY){
         bity=CZARNA;
@@ -86,12 +98,12 @@ legal samobuj(plansza teatr_wojenny,ruch gruch,plansza zbadane,plansza niby_zbit
 }
 
 
-legal czy_legal(plansza teatr_wojenny,ruch gruch,plansza zbadane,plansza niby_zbite,plansza do_zbicia,plansza *backup){
+legal czy_legal(plansza teatr_wojenny,ruch gruch,plansza zbadane,plansza niby_zbite,plansza do_zbicia,ikea *sprawdzam){
     legal czy_mozna;
     
     czy_mozna=samobuj(teatr_wojenny,gruch,zbadane,niby_zbite,do_zbicia);
     if(czy_mozna.czy_legalne==L)
-        czy_mozna=ko(teatr_wojenny,backup);
+        czy_mozna=ko(teatr_wojenny,sprawdzam);
     
     return czy_mozna;
 }
