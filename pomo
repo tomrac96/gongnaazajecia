@@ -19,3 +19,20 @@ int ocena_go(plansza* teatr_wojenny) {
     // Zwracamy różnicę punktów
     return punkty_czarne - punkty_biale;
 }
+
+
+
+
+
+void zakoncz_gre(plansza* teatr_wojenny) 
+{
+    int wynik = ocena_go(teatr_wojenny);
+
+    if (wynik > 0) {
+        printf("\nGracz CZARNY wygrywa!");
+    } else if (wynik < 0) {
+        printf("\nGracz BIALY wygrywa!");
+    } else {
+        printf("\nRemis! Obydwaj gracze mają tyle samo punktów.");
+    }
+}
