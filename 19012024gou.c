@@ -8,7 +8,7 @@ void vanish(plansza*);
 plansza sory_memory(plansza*);
 plansza ruszek(plansza,ruch);
 ruch dokad_przybyszu(plansza,int);
-void no_to_gramy(plansza,plansza,plansza,plansza,legal);
+void no_to_gramy(plansza,plansza,plansza,plansza,legal,rozkaz*,rozkaz);
 plansza czy_bicie(plansza,plansza,plansza,plansza);
 plansza bicie_po_sznurku(plansza,plansza*,plansza*,plansza*,int bity,int bijacy,int i,int j);
 
@@ -19,10 +19,12 @@ legal samobuj(plansza,ruch,plansza,plansza,plansza);
 
 
 int czy_pelna(plansza);
+rozkaz Lista_Schindlera(plansza,plansza,plansza,plansza,castorama*,rozkaz*,int,int);
 void przepisz(plansza*,ikea*);
 
 void main(){
-    
+    rozkaz ptr;
+    rozkaz do_boju_Polsko;
     legal zgoda;
 
     plansza teatr_wojenny;
@@ -34,11 +36,11 @@ void main(){
     plansza do_zbicia;
     vanish(&do_zbicia);
 
-    no_to_gramy(teatr_wojenny,niby_zbite,zbadane,do_zbicia,zgoda);
+    no_to_gramy(teatr_wojenny,niby_zbite,zbadane,do_zbicia,zgoda,&ptr,do_boju_Polsko);
 
 }
 
-void no_to_gramy(plansza teatr_wojenny,plansza niby_zbity,plansza zbadane,plansza do_zbicia,legal zgoda){
+void no_to_gramy(plansza teatr_wojenny,plansza niby_zbity,plansza zbadane,plansza do_zbicia,legal zgoda,rozkaz *ptr,rozkaz do_boju_Polsko){
     castorama historia;
   
     int qniec=0;
@@ -51,6 +53,7 @@ void no_to_gramy(plansza teatr_wojenny,plansza niby_zbity,plansza zbadane,plansz
     do{
 //======================================================================================================================
     teatr_wojenny.ruch_gracza_X=RUCH_CZARNY; //Gracz zaczynajacy
+    Lista_Schindlera(teatr_wojenny,zbadane,niby_zbity,do_zbicia,&historia,ptr,0,0);
      numerek++;
 
         do{
@@ -172,3 +175,34 @@ plansza ruszek(plansza teatr_wojenny,ruch staruszek){
     }
 }
 
+rozkaz Lista_Schindlera(plansza teatr_wojenny, plansza zbadane,plansza niby_zbite,plansza do_zbicia,castorama *historia,rozkaz *ptr,int i,int j){
+    legal moznaa;
+
+            ptr->move.kolumnyk=j;
+            ptr->move.wierszyk=i;
+            moznaa=czy_legal(teatr_wojenny,ptr->move,zbadane,niby_zbite,do_zbicia,&historia);
+            if( i!=(WYSOKOSC_PLANSZY) && j!=(SZEROKOSC_PLANSZY) ){
+                if(teatr_wojenny.plain[j][i]==PUSTE && moznaa.czy_legalne==L)
+                {
+                    
+                    ptr->nastepny=malloc(sizeof(rozkaz));
+                    ptr->loco=SPOKO;
+                    j++;
+                    if(j==SZEROKOSC_PLANSZY)
+                    {
+                        i++;j=0;
+                    }
+                    Lista_Schindlera(teatr_wojenny,zbadane,niby_zbite,do_zbicia,&historia,ptr->nastepny,i,j);  
+                }
+                else
+                {
+                    
+                    ptr->nastepny=malloc(sizeof(rozkaz));
+                    ptr->loco=NIE_SPOKO;
+                    j++;
+                    if(j==SZEROKOSC_PLANSZY){
+                        i++;j=0; }
+                    Lista_Schindlera(teatr_wojenny,zbadane,niby_zbite,do_zbicia,&historia,ptr->nastepny,i++,j++);
+                }
+            }
+}
