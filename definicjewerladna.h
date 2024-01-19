@@ -1,129 +1,56 @@
-#ifndef LEGALNA
-#define LEGALNA
-#include "definicje.h"
-#include "toolsy.h"
+#ifndef DEFINICJE
+#define DEFINICJE
 
-legal ko(plansza teatr_wojenny,castorama *spr)
+#define SZEROKOSC_PLANSZY 6
+#define WYSOKOSC_PLANSZY 6
+//const int DEFEAT=-(SZEROKOSC_PLANSZY*WYSOKOSC_PLANSZY+100);
+//const int VICTORY=-DEFEAT;
+typedef enum { BEZP, ZAGR } save;
+typedef enum {YES,NO} error;
+typedef enum { TAK,NIE } koniec;
+typedef enum { PUSTE, BIALA, CZARNA } wielkosc_planszy;
+typedef enum { RUCH_CZARNY, RUCH_BIALY } kto_sie_rusza;
+typedef enum {L,NL} konfident;
+//https://pl.wikibooks.org/wiki/C/Typy_z%C5%82o%C5%BCone    opis jak działa enum   na tym mozna tez ruchy robic
+
+typedef struct element2
+{ 
+    save bezpieczenstwo;
+    error blad;
+    int qn;
+    kto_sie_rusza ruch_gracza_X;
+    wielkosc_planszy plain[SZEROKOSC_PLANSZY][WYSOKOSC_PLANSZY];
+} plansza;
+
+typedef struct jysk
 {
-    legal mozna2;
-    int kloppppsiikkkk=0;
-    if(teatr_wojenny.ruch_gracza_X==RUCH_CZARNY)
-      for(int j=0;j<SZEROKOSC_PLANSZY;j++)
-        for(int i=0;i<WYSOKOSC_PLANSZY ;i++)
-            if(spr->zero.plain[i][j]==spr->minus2.plain[i][j]) 
-            {
-                kloppppsiikkkk++;
-                if(kloppppsiikkkk==SZEROKOSC_PLANSZY*WYSOKOSC_PLANSZY)
-                    mozna2.czy_legalne=NL;
-                else
-                    mozna2.czy_legalne=L;       
-            }
-            else
-                mozna2.czy_legalne=L;
-             
-    if(teatr_wojenny.ruch_gracza_X==RUCH_BIALY)
-      for(int j=0;j<SZEROKOSC_PLANSZY;j++)
-        for(int i=0;i<WYSOKOSC_PLANSZY ;i++)
-            if(spr->zero.plain[i][j]==spr->minus2.plain[i][j]) 
-            {
-                kloppppsiikkkk++;
-                if(kloppppsiikkkk==SZEROKOSC_PLANSZY*WYSOKOSC_PLANSZY)
-                    mozna2.czy_legalne=NL; 
-                else 
-                    mozna2.czy_legalne=L; 
-            }
-            else
-                mozna2.czy_legalne=L;
-            
-    return mozna2;
-}
+    wielkosc_planszy plain[SZEROKOSC_PLANSZY][WYSOKOSC_PLANSZY];
+} ikea;
 
-legal samobuj(plansza teatr_wojenny,ruch gruch,plansza zbadane,plansza niby_zbite,plansza do_zbicia)
+typedef struct
 {
-    legal mozna;
-    int bity,bijacy;                                    
-    int i=gruch.kolumnyk;
-    int j=gruch.wierszyk;
-    int pusteczka=0,sojuz=0;
+    struct jysk minus2;
+    struct jysk minus1;
+    struct jysk zero;
+} castorama;
 
-    
+typedef struct
+{   
+   
+    int wierszyk;
+    int kolumnyk;
+    koniec pas;
+} ruch;
 
-     if(teatr_wojenny.ruch_gracza_X==RUCH_CZARNY)
-    {
-        bity=CZARNA;
-        bijacy=BIALA; 
-    }
-     if(teatr_wojenny.ruch_gracza_X==RUCH_BIALY)
-    {
-        bity=BIALA; 
-        bijacy=CZARNA; 
-    }
-
-     if(i-1>=0 && teatr_wojenny.plain[i-1][j]==PUSTE)
-        pusteczka++;
-     if(j-1>=0 && teatr_wojenny.plain[i][j-1]==PUSTE)
-        pusteczka++;
-     if(i+1<SZEROKOSC_PLANSZY && teatr_wojenny.plain[i+1][j]==PUSTE)
-        pusteczka++;
-     if(j+1<WYSOKOSC_PLANSZY && teatr_wojenny.plain[i][j+1]==PUSTE)
-        pusteczka++;
-
-    if(pusteczka==0)
-    {
-          
-            if(i-1>=0 && teatr_wojenny.plain[i-1][j]==bity && teatr_wojenny.plain[i-1][j]!=niby_zbite.plain[i-1][j])//sprawdza czy ma sasiadow przyjaciol
-            { 
-                 zbadane.plain[i][j]=teatr_wojenny.plain[i][j];
-                teatr_wojenny=bicie_po_sznurku(teatr_wojenny,&niby_zbite,&zbadane,&do_zbicia,bity,bijacy,i-1,j);
-                if(teatr_wojenny.bezpieczenstwo==BEZP)
-                 sojuz++;    
-            }
-             if(j-1>=0 && teatr_wojenny.plain[i][j-1]==bity && teatr_wojenny.plain[i][j-1]!=niby_zbite.plain[i][j-1])
-            {
-                 zbadane.plain[i][j]=teatr_wojenny.plain[i][j];
-                teatr_wojenny=bicie_po_sznurku(teatr_wojenny,&niby_zbite,&zbadane,&do_zbicia,bity,bijacy,i,j-1);
-                if(teatr_wojenny.bezpieczenstwo==BEZP)
-                 sojuz++;
-            }
-             if(i+1<SZEROKOSC_PLANSZY && teatr_wojenny.plain[i+1][j]==bity && teatr_wojenny.plain[i+1][j]!=niby_zbite.plain[i+1][j])
-            {
-                 zbadane.plain[i][j]=teatr_wojenny.plain[i][j];
-                teatr_wojenny=bicie_po_sznurku(teatr_wojenny,&niby_zbite,&zbadane,&do_zbicia,bity,bijacy,i+1,j);
-                if(teatr_wojenny.bezpieczenstwo==BEZP)
-                 sojuz++;    
-            }
-             if(j+1<WYSOKOSC_PLANSZY && teatr_wojenny.plain[i][j+1]==bity && teatr_wojenny.plain[i][j+1]!=niby_zbite.plain[i][j+1])
-            {
-                 zbadane.plain[i][j]=teatr_wojenny.plain[i][j];
-                teatr_wojenny=bicie_po_sznurku(teatr_wojenny,&niby_zbite,&zbadane,&do_zbicia,bity,bijacy,i,j+1);
-                if(teatr_wojenny.bezpieczenstwo==BEZP)
-                 sojuz++;
-            }
-                 
-             if(sojuz==0)
-                mozna.czy_legalne=NL;
-            else
-                mozna.czy_legalne=L;
-            
-    }
-    else
-    {
-       mozna.czy_legalne=L;
-    }
-    return mozna;
-}
-
-
-legal czy_legal(plansza teatr_wojenny,ruch gruch,plansza zbadane,plansza niby_zbite,plansza do_zbicia,ikea *sprawdzam)
+typedef struct element
 {
-    legal czy_mozna;
-    
-    czy_mozna=samobuj(teatr_wojenny,gruch,zbadane,niby_zbite,do_zbicia);
-    if(czy_mozna.czy_legalne==L)
-        czy_mozna=ko(teatr_wojenny,sprawdzam);
-    return czy_mozna;
-}
+    ruch move;
+    struct element* nastepny;
+} rozkaz;
 
-
+typedef struct 
+{
+    konfident czy_legalne;
+} legal;
 
 #endif
