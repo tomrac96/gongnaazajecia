@@ -5,6 +5,9 @@
 #include <stdio.h>
 #include "definicje.h"
 
+
+
+
 void przepisz(plansza *z,ikea *d0){
      for(int i=0;i<SZEROKOSC_PLANSZY;i++)
         for(int j=0;j<WYSOKOSC_PLANSZY;j++)
@@ -116,10 +119,12 @@ int czy_pelna(plansza teart_wojenny){
     int pelnosc;
     for(int i=0;i<SZEROKOSC_PLANSZY;i++)
         for(int j=0;j<WYSOKOSC_PLANSZY;j++)
-            if(teart_wojenny.plain[i][j]==BIALA || teart_wojenny.plain[i][j]==CZARNA)
+            if(teart_wojenny.plain[j][i]==BIALA || teart_wojenny.plain[j][i]==CZARNA)
                 pelnosc++;
 
     return pelnosc;
 }
+
+
 
 #endif
