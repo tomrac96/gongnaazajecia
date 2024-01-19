@@ -1,29 +1,21 @@
-/*void glebokosc_rowu_marianskiego()
-{
-    int glebokosc_bialka, glebokosc_czarnka;
+int ocena_go(plansza* teatr_wojenny) {
+    int punkty_biale = 0;
+    int punkty_czarne = 0;
 
-    printf("Podaj poziom trudności dla gracza kolka: ");
-    scanf("%d", &glebokosc_bialka);
+    // Iteruj przez planszę i zliczaj punkty
+    for (int j = 0; j < SZEROKOSC_PLANSZY; j++) {
+        for (int i = 0; i < WYSOKOSC_PLANSZY; i++) {
+            if (teatr_wojenny->plain[i][j] == BIALA) {
+                punkty_biale++;
+            } else if (teatr_wojenny->plain[i][j] == CZARNA) {
+                punkty_czarne++;
+            }
+        }
+    }
 
-    printf("Podaj poziom trudności dla gracza krzyzyka: ");
-    scanf("%d", &glebokosc_czarnka);
+    // Zakładamy, że czarne zaczynają, więc białe dostają komi
+    punkty_biale += 6;
 
-    printf("info glebokosc kolka %d glebokosc krzyzyka %d\n", glebokosc_bialka, glebokosc_czarnka);
-
-    // Wywołaj funkcję __graj(), przekazując wybrane poziomy trudności.
-    __graj(teatr_wojenny.gracz_na_ruchu == RUCH_BIALY ? glebokosc_bialka : glebokosc_czarnka);
-}
-*/
-
-void glebokosc_rowu_marianskiego()
-{
-    int glebokosc;
-    scanf("d", glebokosc);
-    graj_piekny_komputerze(glebokosc);
-
-}
-
-void graj_piekny_komputerze(int glebokosc)
-{
-    
+    // Zwracamy różnicę punktów
+    return punkty_czarne - punkty_biale;
 }
