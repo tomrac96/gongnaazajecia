@@ -11,6 +11,7 @@ typedef enum { TAK,NIE } koniec;
 typedef enum { PUSTE, BIALA, CZARNA } wielkosc_planszy;
 typedef enum { RUCH_CZARNY, RUCH_BIALY } kto_sie_rusza;
 typedef enum {L,NL} konfident;
+typedef enum {SPOKO,NIE_SPOKO} git;
 //https://pl.wikibooks.org/wiki/C/Typy_z%C5%82o%C5%BCone    opis jak działa enum   na tym mozna tez ruchy robic
 
 typedef struct element2
@@ -42,6 +43,7 @@ typedef struct
 
 typedef struct element
 {
+    git loco;
     ruch move;
     struct element* nastepny;
 } rozkaz;
