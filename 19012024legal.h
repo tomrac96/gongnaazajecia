@@ -143,7 +143,7 @@ legal wyjatek(plansza teatr_wojenny,ruch gruch,plansza zbadane,plansza niby_zbit
             }
             else
             {
-                if( i==SZEROKOSC_PLANSZY && j==WYSOKOSC_PLANSZY ){
+                if( i==(SZEROKOSC_PLANSZY-1) && j==(WYSOKOSC_PLANSZY-1) ){
                     lagel.czy_legalne=NL;
                     return lagel; 
                 }
@@ -160,14 +160,17 @@ legal samobuj(plansza teatr_wojenny,ruch gruch,plansza zbadane,plansza niby_zbit
 
     mozna=wyjatek(teatr_wojenny,gruch,zbadane,niby_zbite,do_zbicia);
     if(mozna.czy_legalne==NL){
+        
 
      if(teatr_wojenny.ruch_gracza_X==RUCH_CZARNY){
         bity=CZARNA;
         bijacy=BIALA; 
+        teatr_wojenny.plain[i][j]=CZARNA;
         }
      if(teatr_wojenny.ruch_gracza_X==RUCH_BIALY){
         bity=BIALA; 
         bijacy=CZARNA; 
+         teatr_wojenny.plain[i][j]=BIALA;
         }
 
      if(i-1>=0 && teatr_wojenny.plain[i-1][j]==PUSTE)
