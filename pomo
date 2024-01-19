@@ -36,3 +36,25 @@ void zakoncz_gre(plansza* teatr_wojenny)
         printf("\nRemis! Obydwaj gracze mają tyle samo punktów.");
     }
 }
+
+
+
+
+
+
+
+
+
+
+void arena()//rozpoczecie meczu
+{
+    int glebokosc_kolka, glebokosc_krzyzyka, ocena;
+    scanf("%d %d", &glebokosc_kolka, &glebokosc_krzyzyka);
+    printf("info glebokosc kolka %d glebokosc krzyzyka %d\n", glebokosc_kolka, glebokosc_krzyzyka);
+    while((ocena = negamax(&plansza, 0)) != -10 && ocena != 10 && czy_sa_wolne_pola(&plansza))
+    {
+        __graj(poletko.gracz_na_ruchu == RUCH_BIALY ? glebokosc_kolka : glebokosc_krzyzyka);
+        wypisz(&plansza);
+    }
+    printf("info arena sie skonczyla\n");
+}
