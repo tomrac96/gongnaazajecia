@@ -129,36 +129,6 @@ int czy_pelna(plansza teart_wojenny){
     return pelnosc+1;
 }
 
-int ocena_go(plansza* teatr_wojenny) 
-    {
-    int punkty_biale = 0;
-    int punkty_czarne = 0;
-
-    // Iteruj przez planszę i zliczaj punkty
-    for (int j = 0; j < SZEROKOSC_PLANSZY; j++) {
-
-        for (int i = 0; i < WYSOKOSC_PLANSZY; i++) 
-        {
-            if (teatr_wojenny->plain[i][j] == BIALA) 
-            {
-                punkty_biale++;
-            } 
-            else if (teatr_wojenny->plain[i][j] == CZARNA) 
-            {
-                punkty_czarne++;
-            }
-        }
-    }
-
-    // Zakładamy, że czarne zaczynają, więc białe dostają komi
-    //punkty_biale += 6;
-
-    // Zwracamy różnicę punktów
-    return punkty_czarne - punkty_biale;
-}
-
-
-
 void endgame(plansza *teatr_wojenny,int *punkciorBIALY,int *punkciorCZARNY){
     plansza policzone;
     vanish(&policzone);
