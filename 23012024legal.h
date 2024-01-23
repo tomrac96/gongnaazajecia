@@ -263,8 +263,10 @@ void czy_zakladnik(plansza *teatr_wojenny,plansza *policzone,int *negroHostage,i
 
     for (int j = 0; j < SZEROKOSC_PLANSZY; j++)
         for (int i = 0; i < WYSOKOSC_PLANSZY; i++)   
-            if(hostage.plain[i][j]==BIALA)
-                policzone->plain[i][j]=BIALA,negroHostage++;
+            if(hostage.plain[i][j]==BIALA && teatr_wojenny->plain[i][j]==CZARNA)
+            {
+                policzone->plain[i][j]=BIALA;(*negroHostage)++;
+            }
 
     //+======================== SPRAWDZAM BIALYCH ZAKLADNIKOW =================================
     vanish(&pom1);vanish(&pom2);vanish(&pom3);
@@ -288,8 +290,10 @@ void czy_zakladnik(plansza *teatr_wojenny,plansza *policzone,int *negroHostage,i
 
     for (int j = 0; j < SZEROKOSC_PLANSZY; j++)
         for (int i = 0; i < WYSOKOSC_PLANSZY; i++)   
-            if(hostage.plain[i][j]==CZARNA)
-                policzone->plain[i][j]=CZARNA,blancoHostage++;
+            if(hostage.plain[i][j]==CZARNA && teatr_wojenny->plain[i][j]==BIALA)
+            {
+                policzone->plain[i][j]=CZARNA;(*blancoHostage)++;   
+            }
 
     free(&hostage);
 }
