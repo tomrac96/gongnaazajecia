@@ -1,0 +1,12 @@
+void arena()//rozpoczecie meczu
+{
+    int glebokosc_kolka, glebokosc_krzyzyka, ocena;
+    scanf("%d %d", &glebokosc_kolka, &glebokosc_krzyzyka);
+    printf("info glebokosc kolka %d glebokosc krzyzyka %d\n", glebokosc_kolka, glebokosc_krzyzyka);
+    while((ocena = negamax(&poletko, 0)) != -10 && ocena != 10 && czy_sa_wolne_pola(&poletko))
+    {
+        __graj(poletko.gracz_na_ruchu == RUCH_BIALEGO ? glebokosc_kolka : glebokosc_krzyzyka);
+        wypisz(&poletko);
+    }
+    printf("info arena sie skonczyla\n");
+}
