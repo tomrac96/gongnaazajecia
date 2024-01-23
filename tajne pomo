@@ -10,3 +10,16 @@ void arena()//rozpoczecie meczu
     }
     printf("info arena sie skonczyla\n");
 }
+
+
+
+/*void arena()
+{
+    int glebokosc_cz, glebokosc_b, ocena;
+    scanf("%d %d", &glebokosc_cz, &glebokosc_b);
+    printf("Glebokosc gry czarnego: %d Glebokosc gry bialego %d \n", glebokosc_cz, glebokosc_b);
+    while((ocena=negamax(&teatr_wojenny, 0))!=-10&&ocena!=10)
+    {
+        //funkcja graj
+    }
+}*/
