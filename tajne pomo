@@ -23,3 +23,69 @@ void arena()//rozpoczecie meczu
         //funkcja graj
     }
 }*/
+
+
+
+
+
+
+
+
+
+
+
+
+void komputer_vs_komputer(plansza teatr_wojenny, plansza zbadane, plansza niby_zbity, plansza do_zbicia, legal zgoda, rozkaz *ptr, rozkaz do_boju_Polsko) {
+    castorama historia;
+    int punkciorBIALY = 0, punkciorCZARNY = 0;
+    int qniec = 0;
+    int numerek = 0;
+    plansza plac_boju;
+
+    do {
+        //======================================================================================================================
+        teatr_wojenny.ruch_gracza_X = RUCH_CZARNY; // Gracz zaczynający
+        Lista_Schindlera(teatr_wojenny, zbadane, niby_zbity, do_zbicia, &historia, ptr, 0, 0);
+        numerek++;
+
+        do {
+            ruch staruszek1 = dokad_przybyszu(teatr_wojenny, numerek);
+
+            plac_boju = ruszek(teatr_wojenny, staruszek1);
+            przepisz(&plac_boju, &historia.minus2);
+
+            if (plac_boju.qn == 1 || czy_pelna(plac_boju) == SZEROKOSC_PLANSZY * WYSOKOSC_PLANSZY)
+                qniec++;
+            else
+                plac_boju = czy_bicie(teatr_wojenny, niby_zbity, zbadane, do_zbicia);
+
+            teatr_wojenny = plac_boju;
+        } while (qniec != 2);
+
+        endgame(&teatr_wojenny, &punkciorBIALY, &punkciorCZARNY);
+        zwyciezca(&punkciorCZARNY, &punkciorBIALY);
+
+        //======================================================================================================================
+        teatr_wojenny.ruch_gracza_X = RUCH_BIALY; // Kolej na drugiego gracza
+        Lista_Schindlera(teatr_wojenny, zbadane, niby_zbity, do_zbicia, &historia, ptr, 0, 0);
+        numerek++;
+
+        do {
+            ruch staruszek2 = dokad_przybyszu(teatr_wojenny, numerek);
+
+            plac_boju = ruszek(teatr_wojenny, staruszek2);
+            przepisz(&plac_boju, &historia.minus1);
+
+            if (plac_boju.qn == 1 || czy_pelna(plac_boju) == SZEROKOSC_PLANSZY * WYSOKOSC_PLANSZY)
+                qniec++;
+            else
+                plac_boju = czy_bicie(teatr_wojenny, niby_zbity, zbadane, do_zbicia);
+
+            teatr_wojenny = plac_boju;
+        } while (qniec != 2);
+
+        endgame(&teatr_wojenny, &punkciorBIALY, &punkciorCZARNY);
+        zwyciezca(&punkciorCZARNY, &punkciorBIALY);
+
+    } while (qniec != 2);
+}
