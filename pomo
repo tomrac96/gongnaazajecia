@@ -10,3 +10,15 @@ void arena()//rozpoczecie meczu
     }
     printf("info arena sie skonczyla\n");
 }
+
+
+
+
+int czy_sa_wolne_pola(poletko_gry* p)
+{   
+    for(int i = 0; i < SZEROKOSC_POLA; i++)
+        for(int j = 0; j < WYSOKOSC_POLA; j++)
+            if (p->pole[i][j] == PUSTE)
+                return 1;
+    return 0;
+}
