@@ -1,0 +1,53 @@
+ruch dokad_bociszu(int *ocena,plansza teatr_wojenny,plansza niby_zbite,plansza zbadane,plansza do_zbicia,legal zgoda,rozkaz *ptr,rozkaz do_boju_Polsko,castorama *historia){
+
+    Lista_Schindlera( teatr_wojenny,zbadane,niby_zbite,do_zbicia,historia,ptr,0,0 ); //zawiera tylko legalne ruchy, w ptr sa ruchy
+    rozkaz temp;
+    
+    ptr->ocena_ruchu=__negamax(teatr_wojenny,glebokosc,alfa,beta,do_zbicia,zbadane,niby_zbite,ptr->move)//w ptr sa wszystkie ruchy, a negamax moze ocenic tlyko jeden,
+    
+    
+}
+
+void __graj(int glebokosc)
+{
+   
+    if (ruchy)
+    {
+        ruch *ruch_debesciak = NULL;
+        int ocena_posuniecia, debesciak = HANIEBNA_PORAZKA;
+        for(ruch_na_liscie *ruch = ruchy; ruch; ruch = ruch->nastepny)
+        {
+            printf("info oceniam ruch %c%d\r", 'A' + ruch->ruch.na_pole.kolumna, ruch->ruch.na_pole.wiersz);
+            poletko_gry wariant = wykonaj_ruch(&poletko, ruch->ruch);
+            ocena_posuniecia = -negamax(&wariant, glebokosc);
+            if (ocena_posuniecia > debesciak)
+            {
+                debesciak = ocena_posuniecia;
+                ruch_debesciak = &ruch->ruch;
+                printf("%c%d (%s %d) jest debesciakiem\n", 'A' + ruch->ruch.na_pole.kolumna, ruch->ruch.na_pole.wiersz, enum2txt(ocena_posuniecia), ocena_posuniecia);
+            }   
+        }
+        if(!ruch_debesciak)
+            ruch_debesciak = &ruchy->ruch;
+        poletko = wykonaj_ruch(&poletko, *ruch_debesciak);
+        printf("info debesciak wykonany (%s %d)\n", enum2txt(debesciak), debesciak);
+        zabij_ruchy_na_liscie(ruchy);
+    }
+    else 
+        printf("info nie ma legalnego posuniecia\n");
+}
+
+void bitwa(plansza teatr_wojenny,plansza niby_zbite,plansza zbadane,plansza do_zbicia,legal zgoda,rozkaz *ptr,rozkaz do_boju_Polsko))
+{
+    int biale=0,czarne=0;
+    int glebokosc_bialasa, glebokosc_czarnasa, ocena;
+    printf("podaj 2 liczby (glebokosci bialego i czarnego");
+    scanf("%d %d", &glebokosc_bialasa, &glebokosc_czarnasa);
+    printf("info glebokosc kolka %d glebokosc krzyzyka %d\n", glebokosc_bialasa, glebokosc_czarnasa);
+    while((ocena = negamax(&teatr_wojenny, 0)) != DEFEAT && ocena != VICTORY && czy_sa_wolne_pola(&poletko))
+    {
+        no_to_gramy(teatr_wojenny,niby_zbite,zbadane,do_zbicia,zgoda,&ptr,do_boju_Polsko);
+        wypisz(&poletko);
+    }
+    printf("info arena sie skonczyla\n");
+}
