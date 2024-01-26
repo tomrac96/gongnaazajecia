@@ -2,7 +2,8 @@
 #include "toolsy.h"
 #include "definicje.h"
 #include "legalna.h"
-//xamagen!!1!
+#include "xamagen.h"
+#include "ocena.h"
 
 void cr_byczq(char*);
 void wypisz();
@@ -148,7 +149,7 @@ void arena(plansza* teatr_wojenny, plansza zbadane,plansza niby_zbite,plansza do
     printf("\nWpisz glebokosc --> ");
     scanf("%d %d", &glebokosc_bialasa, &glebokosc_czarnasa);
     printf("info glebokosc bialasa %d glebokosc czarnasa %d\n", glebokosc_bialasa, glebokosc_czarnasa);
-    while((ocena = negamax(teatr_wojenny, 0)) != -10 && ocena != 10 && czy_pelna ( *teatr_wojenny ) != ( SZEROKOSC_PLANSZY * WYSOKOSC_PLANSZY ) )
+    while((ocena = negamax(teatr_wojenny, 0,zbadane,niby_zbite,do_zbicia,&historia)) != -10 && ocena != 10 && czy_pelna ( *teatr_wojenny ) != ( SZEROKOSC_PLANSZY * WYSOKOSC_PLANSZY ) )
     {
         __graj(teatr_wojenny->ruch_gracza_X == RUCH_BIALY ? glebokosc_bialasa : glebokosc_czarnasa,teatr_wojenny,zbadane,niby_zbite,do_zbicia,&historia);
         wypisz(&teatr_wojenny);
@@ -168,7 +169,7 @@ void __graj(int glebokosc,plansza *teatr_wojenny, plansza zbadane,plansza niby_z
         {
             printf("info oceniam ruch %c%d\r", 'A' + rukh->move.kolumnyk, rukh->move.wierszyk);
             plansza wariant = postaw_sie(*teatr_wojenny, rukh->move);
-            ocena_posuniecia = -negamax(&wariant, glebokosc);
+            ocena_posuniecia = -negamax(&wariant, glebokosc,zbadane,niby_zbite,do_zbicia,&historia);
             if (ocena_posuniecia > debesciak)
             {
                 debesciak = ocena_posuniecia;
